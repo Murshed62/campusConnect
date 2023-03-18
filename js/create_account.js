@@ -11,11 +11,13 @@ const createBtn = document.getElementById("create-btn").addEventListener('click'
     let confirmPassField = document.getElementById("confirm-pass-field").value;
     let notMatch = document.getElementById("not-match");
 
-    
     let agreeCheckbox = document.getElementById("agree-checkbox");
 
-
     if(nameField.length === 0 || rollField === 0 || deptField === 0 || batchField === 0 || emailField === 0 || passField === 0 || confirmPassField === 0 || !agreeCheckbox.checked){
+        notMatch.classList.remove('d-none');
+        return;
+    }
+    else if(passField !== confirmPassField){
         notMatch.classList.remove('d-none');
         return;
     }
@@ -28,4 +30,16 @@ const btnOpacity = () =>{
     btn.style.transition = 'all .5s';
     btn.classList.remove('opacity-50')
     
+}
+
+const addToLocalStorage = () => {
+    const roll = document.getElementById("roll-field");
+    const rollValue = roll.value;
+    const pass = document.getElementById("pass-field");
+    const passValue = pass.value;
+
+    if(rollValue && passValue){
+        localStorage.setItem('roll',rollValue);
+        localStorage.setItem('password', passValue);
+    }
 }
